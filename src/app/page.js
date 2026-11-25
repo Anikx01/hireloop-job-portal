@@ -1,10 +1,11 @@
+import JobDiscoverySection from "@/components/JobDiscoverySection";
 import StatsSection from "@/components/StatsSection";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black bg-zinc-50 font-sans dark:bg-black">
+    <main className="min-h-screen bg-black">
       <StatsSection />
-    </div>
+      <JobDiscoverySection />
+    </main>
   );
 }

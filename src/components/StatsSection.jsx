@@ -1,5 +1,6 @@
+"use client";
 import { Briefcase, ChartColumn, Magnifier, Star } from "@gravity-ui/icons";
-
+import { motion } from "motion/react";
 const stats = [
   {
     value: "50K",
@@ -52,6 +53,7 @@ export default function StatsSection() {
             <br />
             find their dream positions.
           </h2>
+          <motion.p animate={{ rotate: 45 }}>Remote Jobs</motion.p>
         </div>
 
         {/* Statistics Cards */}
