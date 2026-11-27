@@ -1,19 +1,23 @@
 "use server";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { serverMutation } from "../core/server";
 
 export const createJob = async (newJobData) => {
-  const res = await fetch(`${baseUrl}/api/jobs`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newJobData),
+  const session = await auth.api.getSession({
+    headers: await headers(),
   });
 
-  if (!res.ok) {
-    throw new Error(`Failed to create job (status ${res.status})`);
+  if (!session?.user) {
+    throw new Error("You must be signed in to post a job.");
   }
 
-  return await res.json();
+  const jobPayload = {
+    ...newJobData,
+    recruiterId: session.user.id,
+    recruiterEmail: session.user.email,
+  };
+
+  return serverMutation("/api/jobs", jobPayload);
 };

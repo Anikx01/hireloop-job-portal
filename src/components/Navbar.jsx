@@ -24,7 +24,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-[#222222] border-2 border-[#00A6FF]">
+    <nav className="sticky top-0 z-50 w-full bg-[#222222] ">
       <header className="flex h-14 items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link href="/" className="text-2xl font-extrabold tracking-tight">
