@@ -1,5 +1,5 @@
 "use client";
-
+import { Description, Radio, RadioGroup } from "@heroui/react";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -31,6 +31,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState("seeker");
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -58,6 +59,7 @@ export default function SignUpPage() {
         name: name.trim(),
         email: email.trim(),
         password,
+        role,
         callbackURL: "/",
       });
 
@@ -227,7 +229,35 @@ export default function SignUpPage() {
                 </InputGroup>
                 <FieldError />
               </TextField>
-
+              {/* {Role Field} */}
+              <div className="flex flex-col gap-4">
+                <Label>Subscription plan</Label>
+                <RadioGroup
+                  defaultValue="seeker"
+                  name="role"
+                  orientation="horizontal"
+                  onChange={(value) => setRole(value)}
+                >
+                  <Radio value="seeker">
+                    <Radio.Content>
+                      <Radio.Control>
+                        <Radio.Indicator />
+                      </Radio.Control>
+                      Job Seeker
+                    </Radio.Content>
+                    <Description>For side projects</Description>
+                  </Radio>
+                  <Radio value="recruiter">
+                    <Radio.Content>
+                      <Radio.Control>
+                        <Radio.Indicator />
+                      </Radio.Control>
+                      Recruiter
+                    </Radio.Content>
+                    <Description>Advanced reporting</Description>
+                  </Radio>
+                </RadioGroup>
+              </div>
               {/* Submit Button */}
               <Button
                 type="submit"
